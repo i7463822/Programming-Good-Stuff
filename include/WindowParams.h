@@ -1,3 +1,9 @@
+/// \@file Paddle.h
+/// \@brief this class contains the paddle parameters, getters and setters
+/// \@author Dominique Claire Matthew
+/// \@version 1
+/// \@date 18/05/18
+
 #ifndef WINDOWPARAMS_H_
 #define WINDOWPARAMS_H_
 

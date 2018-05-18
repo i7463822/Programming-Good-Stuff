@@ -18,14 +18,12 @@ CONFIG-=app_bundle
 SOURCES+= $$PWD/src/NGLScene.cpp    \
           $$PWD/src/Paddle.cpp \
 					$$PWD/src/main.cpp \
-    src/Ball.cpp \
-    src/plane.cpp
+    src/Ball.cpp
 # same for the .h files
 HEADERS+= $$PWD/include/NGLScene.h \
           $$PWD/include/Paddle.h \
           $$PWD/include/WindowParams.h \
-    include/Ball.h \
-    include/plane.h
+    include/Ball.h
 # and add the include dir into the search path for Qt and make
 INCLUDEPATH +=./include
 # where our exe is going to live (root of project)

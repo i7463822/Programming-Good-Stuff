@@ -8,21 +8,20 @@
 #include <ngl/Light.h>
 #include <ngl/Text.h>
 #include "WindowParams.h"
+#include <QOpenGLWidget>
 #include <QOpenGLWindow>
 #include <QSet>
 #include <memory>
 #include <QTime>
 //----------------------------------------------------------------------------------------------------------------------
-/// @file NGLScene.h
-/// @brief this class inherits from the Qt OpenGLWindow and allows us to use NGL to draw OpenGL
-/// @author Jonathan Macey
-/// @version 1.0
-/// @date 10/9/13
+/// \@file NGLScene.h
+/// \@brief this class inherits from the Qt OpenGLWindow and allows us to use NGL to draw OpenGL
+/// \@author Dominique Claire Matthew
+/// \@version 7
+/// \@date 18/05/18
 /// Revision History :
-/// This is an initial version used for the new NGL6 / Qt 5 demos
+/// This is the final NGLScene.h and does not need changing.
 /// @class NGLScene
-/// @brief our main glwindow widget for NGL applications all drawing elements are
-/// put in this file
 //----------------------------------------------------------------------------------------------------------------------
 
 class NGLScene : public QOpenGLWindow
@@ -70,54 +69,54 @@ private:
     ngl::Vec3 m_modelPos;
 
 
-
     //----------------------------------------------------------------------------------------------------------------------
-    /// @brief a timer triggered by the startTimer call in the ctor this is called
-    /// to update the paddle position based on the key presses
+    /// @brief a timer triggered by the startTimer call in the ctor this is
+    /// called to update the paddle position based on the key presses
     //----------------------------------------------------------------------------------------------------------------------
     int m_updatePaddleTimer;
     //----------------------------------------------------------------------------------------------------------------------
     /// @brief timer to change the ball position by calling update()
     //----------------------------------------------------------------------------------------------------------------------
     int m_ballUpdateTimer;
+    //----------------------------------------------------------------------------------------------------------------------
     /// @brief flag to indicate if animation is active or not
     //----------------------------------------------------------------------------------------------------------------------
     bool m_animate;
-
     //----------------------------------------------------------------------------------------------------------------------
     /// @brief we will draw with a different timer to the update
     //----------------------------------------------------------------------------------------------------------------------
     int m_redrawTimer;
     //----------------------------------------------------------------------------------------------------------------------
+    /// @brief flag to show bounding sphere
+    //----------------------------------------------------------------------------------------------------------------------
+    bool m_showBSphere;
+
+    //----------------------------------------------------------------------------------------------------------------------
     /// @brief a pointer to our paddle
     //----------------------------------------------------------------------------------------------------------------------
-    std::unique_ptr<Paddle> m_paddle;
+    std::unique_ptr<Paddle> m_paddleA;
+    //----------------------------------------------------------------------------------------------------------------------
     /// @brief a pointer to our second paddle
     //----------------------------------------------------------------------------------------------------------------------
-    std::unique_ptr<Paddle> m_paddle2;
-
+    std::unique_ptr<Paddle> m_paddleB;
+    //----------------------------------------------------------------------------------------------------------------------
     /// @brief a pointer to our ball
     //----------------------------------------------------------------------------------------------------------------------
     std::unique_ptr<Ball> m_ball;
-
-    /// @brief a pointer to our plane
     //----------------------------------------------------------------------------------------------------------------------
-    //std::unique_ptr<Plane> m_plane;
-
     /// @brief the bounding box to contain the spheres
     //----------------------------------------------------------------------------------------------------------------------
     std::unique_ptr<ngl::BBox> m_bbox;
+    //----------------------------------------------------------------------------------------------------------------------
+    /// @brief the text that is to be displayed on screen
+    //----------------------------------------------------------------------------------------------------------------------
+    std::unique_ptr<ngl::Text> m_text;
+
 
     //----------------------------------------------------------------------------------------------------------------------
     /// @brief the keys being pressed
     //----------------------------------------------------------------------------------------------------------------------
     QSet<Qt::Key> m_keysPressed;
-
-    //----------------------------------------------------------------------------------------------------------------------
-    /// @brief flag to show bounding sphere
-    //----------------------------------------------------------------------------------------------------------------------
-    bool m_showBSphere;
-
     //----------------------------------------------------------------------------------------------------------------------
     /// @brief method to load transform matrices to the shader
     //----------------------------------------------------------------------------------------------------------------------
@@ -139,14 +138,12 @@ private:
     /// @param _event the Qt Event structure
     //----------------------------------------------------------------------------------------------------------------------
     void mouseReleaseEvent ( QMouseEvent *_event );
-
     //----------------------------------------------------------------------------------------------------------------------
     /// @brief this method is called everytime the mouse wheel is moved
     /// inherited from QObject and overridden here.
     /// @param _event the Qt Event structure
     //----------------------------------------------------------------------------------------------------------------------
     void wheelEvent( QWheelEvent *_event);
-
     //----------------------------------------------------------------------------------------------------------------------
     /// @brief processKeyDown passed from the main window class
     /// @param *_event a pointer to the QKeyEvent passed from main window
@@ -164,10 +161,7 @@ private:
     /// @param *_event a pointer to the timer event id
     //----------------------------------------------------------------------------------------------------------------------
     void timerEvent( QTimerEvent *_event);
-    //----------------------------------------------------------------------------------------------------------------------
-    /// @brief our font / text
-    //----------------------------------------------------------------------------------------------------------------------
-    std::unique_ptr<ngl::Text> m_text;
+
     //----------------------------------------------------------------------------------------------------------------------
     /// @brief check the collisions
     //----------------------------------------------------------------------------------------------------------------------
@@ -183,31 +177,31 @@ private:
     /// @brief check the bounding box collisions
     //----------------------------------------------------------------------------------------------------------------------
     void BBoxCollision();
-    //----------------------------------------------------------------------------------------------------------------------
-    /// @brief load the texture and store the id in m_textureName
-    //----------------------------------------------------------------------------------------------------------------------
-    void loadTexture();
-    //----------------------------------------------------------------------------------------------------------------------
-    /// @brief opengl texture id for the crate texture
-    //----------------------------------------------------------------------------------------------------------------------
-    GLuint m_textureName;
+
     //----------------------------------------------------------------------------------------------------------------------
     /// @brief Set all positions of the paddle and ball back to zero
     //----------------------------------------------------------------------------------------------------------------------
     void reset();
     //----------------------------------------------------------------------------------------------------------------------
-    /// @brief GUI of the game
+    /// @brief Set to create a delay between resetting the positions
     //----------------------------------------------------------------------------------------------------------------------
-    void GUI();
+    void timer();
 
-
+    // to store the values of the players
+    int m_scoreA, m_scoreB;
     ngl::Transformation m_transform;
+
+    // Viewing matrix
     ngl::Mat4 m_view;
+    // Projection matrix
     ngl::Mat4 m_project;
-    void movePaddle();
-    void movePaddle2();
+
+    // Paddle A (Player 1) is the paddle at the top of the screen
+    void movePaddleA();
+    // Paddle B (Player 2) is the paddle at the bottom of the screen
+    void movePaddleB();
+    // Set to move the ball
     void moveBall();
-    QTime m_currentTime;
 
 
 };

@@ -1,8 +1,19 @@
 <<<<<<< HEAD
-# GameKeyControl
-![alt tag](http://nccastaff.bournemouth.ac.uk/jmacey/GraphicsLib/Demos/GameKeyControl.png)
+# Pong
+Computing for Animation 1, Programming Assignment
+Contains the files:
+	Game.pro
+	Ball.h
+	NGLScene.h
+	Paddle.h
+	WindowParams.h
+	Ball.cpp
+	main.cpp
+	NGLScene.cpp
+	Paddle.cpp
+	PhongFragment.glsl
+	PhongVertex.glsl
 
-A demonstration on how to do game style multi key controls within Qt
 =======
 # Programming-Good-Stuff
 >>>>>>> d6635d79aaf3e20bda18fef9015c5f752da0d3cf
